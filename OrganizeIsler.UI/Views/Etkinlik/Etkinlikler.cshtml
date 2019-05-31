@@ -1,0 +1,39 @@
+﻿@using OrganizeIsler.Entity
+@model List<Organizeler>
+@{
+	ViewBag.Title = "Etkinlikler";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/PartialView/HeaderPartialView.cshtml")
+
+<br />
+
+<div>
+	<div>
+		
+			<div class="col-lg-4 col-md-6 hat sedan">
+				<div>
+					@foreach (Organizeler item in Model)
+					{
+						<div>
+							<a href="#"><img style="width:400px;height:200px;" src="@item.OrganizeResmi"/>@item.OrganizeAdi</a>
+						</div>
+						<div>
+							<a href="#">@item.OrganizeTarihi,@item.OrganizeYeri</a>
+							@Html.ActionLink("Detaylar", "Detay", new { id = item.OrganizeID },new{ @class ="btn btn-danger"})
+							@*<a href="/Etkinlik/Detay/@item.OrganizeID" title="deneme">Detaylar</a>*@
+								@*<button  type="submit" class="btn btn-danger" value="Kayıt"> Detaylar</button>*@
+							    @*<button type="submit" class="btn btn-danger" value="Kayıt"></button>*@
+
+						</div>
+						<hr />
+
+					}
+				</div>
+			</div>
+			
+		</div>
+
+</div>
+

@@ -1,0 +1,76 @@
+﻿@model OrganizeIsler.Entity.Organizeler
+
+@{
+    ViewBag.Title = "EtkinlikEkle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/PartialView/HeaderPartialView.cshtml")
+
+@using (Html.BeginForm("EtkinlikEkle","Etkinlik",FormMethod.Post,new { enctype="multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+	<h4>Organizeler</h4>
+	<hr />
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	<div class="form-group">
+		@Html.LabelFor(model => model.OrganizeAdi, htmlAttributes: new { @class = "control-label col-md-2" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.OrganizeAdi, new { htmlAttributes = new { @class = "form-control" } })
+			@Html.ValidationMessageFor(model => model.OrganizeAdi, "", new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(model => model.OrganizeKayitTarihi, htmlAttributes: new { @class = "control-label col-md-2" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.OrganizeKayitTarihi, new { htmlAttributes = new { @class = "form-control" } })
+			@Html.ValidationMessageFor(model => model.OrganizeKayitTarihi, "", new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(model => model.OrganizeTarihi, htmlAttributes: new { @class = "control-label col-md-2" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.OrganizeTarihi, new { htmlAttributes = new { @class = "form-control" } })
+			@Html.ValidationMessageFor(model => model.OrganizeTarihi, "", new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(model => model.OrganizeYeri, htmlAttributes: new { @class = "control-label col-md-2" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.OrganizeYeri, new { htmlAttributes = new { @class = "form-control" } })
+			@Html.ValidationMessageFor(model => model.OrganizeYeri, "", new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(model => model.KatilimciSayisi, htmlAttributes: new { @class = "control-label col-md-2" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.KatilimciSayisi, new { htmlAttributes = new { @class = "form-control" } })
+			@Html.ValidationMessageFor(model => model.KatilimciSayisi, "", new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(model => model.OrganizeResmi, htmlAttributes: new { @class = "control-label col-md-2" })
+		<div class="col-md-10">
+			<input type="file" name="OrganizeResmi" id="OrganizeResmi" accept=".PNG,.png,.jpeg,.JPEG,.jpg,.JPG,.gif" class="form-control" />
+			@*@Html.EditorFor(model => model.OrganizeResmi, new { htmlAttributes = new { @class = "form-control" } })*@
+			@Html.ValidationMessageFor(model => model.OrganizeResmi, "", new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-md-offset-2 col-md-10">
+			<input type="submit" value="Ekle" class="btn btn-success" />
+		</div>
+	</div>
+</div>
+}
+<div>
+    @Html.ActionLink("Geri", "Etkinlikler")
+</div>

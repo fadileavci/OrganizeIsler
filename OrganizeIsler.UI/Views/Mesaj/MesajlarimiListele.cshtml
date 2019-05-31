@@ -1,0 +1,44 @@
+﻿
+@using OrganizeIsler.Entity
+@model IEnumerable<OrganizeIsler.Entity.Mesaj>
+
+@{
+	ViewBag.Title = "MesajlarimiListele";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("~/Views/PartialView/HeaderPartialView.cshtml")
+<p>
+	
+</p>
+<table class="table">
+	<tr>
+		<th>
+			<label> Gonderen </label>
+		</th>
+		<th>
+
+			<label> Mesaj </label>
+		</th>
+		
+		<th></th>
+	</tr>
+	@foreach (var item in Model)
+	{
+	<tr>
+		<td>
+			@Html.DisplayFor(modelItem => item.Kullanicilar.Adi)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.Mesaj1)
+		</td>
+		
+
+		<td>
+			@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+			@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+			@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+		</td>
+	</tr>
+	}
+
+</table>

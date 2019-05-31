@@ -1,0 +1,130 @@
+﻿
+@using OrganizeIsler.Entity
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+@{
+	Kullanicilar kul = null;
+	if (Session["kullanici"] != null)
+	{
+		kul = Session["kullanici"] as Kullanicilar;
+	}
+}
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			@Html.ActionLink("Organize İşler", "Etkinlikler", "Etkinlik", new { area = "" }, new { @class = "navbar-brand" })
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li>@kul.Adi</li>
+				<li>@Html.ActionLink("Etkinlikler", "Etkinlikler", "Etkinlik")</li>
+				<li>@Html.ActionLink("Kayıtlı Etkinliklerim", "Etkinliklerim", "Etkinlik")</li>
+				<li>@Html.ActionLink("Etkinlik Oluştur", "EtkinlikEkle", "Etkinlik")</li>
+				<li>
+
+					<div class="dropdown">
+						<button class="dropbtn">Mesajlar</button>
+						<div class="dropdown-content">
+							<a href="#">@Html.ActionLink("Gelen Mesajlar", "MesajlarimiListele", "Mesaj")</a>
+							<a href="#">@Html.ActionLink("Giden Mesajlar", "MesajlarimiListele", "Mesaj")</a>
+							
+						</div>
+					</div>
+				</li>
+
+
+				@*<a href="#">Mesajlar</a>
+					<ul class="dropdown">
+						<li>@Html.ActionLink("Mesajlarım", "MesajlarimiListele", "Mesaj")</li>
+						<li>@Html.ActionLink("Gonderdiğim Mesajlar", "MesajlarimiListele", "Mesaj")  </li>
+
+					</ul>*@
+
+
+
+
+
+
+				@*<li>
+						<div class="w3-container">
+							<button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-animate-zoom w3-red w3-large">Mesaj Gönder</button>
+							<div id="id01" class="w3-modal">
+								<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+									<div class="w3-center">
+										<br>
+										<span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+										<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5gTsY80SQ8D_4S4fMgdaDPa54W5thXEqDCEF-WqEoaIX0P6H7" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+									</div>
+									<form class="w3-container" action="/action_page.php">
+										<div class="w3-section">
+											<label><b>Mail Adresi</b></label>
+											<input class="w3-input w3-border" type="text" placeholder="Göndereceğiniz Mail Adresi.. " name="mail" required>
+											<label><b>Mesaj İçeriği</b></label>
+											<input class="w3-input w3-border" type="password" placeholder="Mesaj..." name="psw" required>
+											<button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Mesajı Gönder</button>
+										</div>
+									</form>
+									<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+										<button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">İptal</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>*@
+				<li>@Html.ActionLink("Çıkış", "Logout", "Login")</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<style>
+	.dropbtn {
+		background-color: #600303;
+		color: white;
+		padding: 16px;
+		font-size: 16px;
+		border: none;
+		cursor: pointer;
+	}
+
+	.dropdown {
+		position: relative;
+		display: inline-block;
+	}
+
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		background-color: #f9f9f9;
+		min-width: 160px;
+		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		z-index: 1;
+	}
+
+		.dropdown-content a {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+		}
+
+			.dropdown-content a:hover {
+				background-color: #d13f3f
+			}
+
+	.dropdown:hover .dropdown-content {
+		display: block;
+	}
+
+	.dropdown:hover .dropbtn {
+		background-color: #d13f3f;
+	}
+</style>

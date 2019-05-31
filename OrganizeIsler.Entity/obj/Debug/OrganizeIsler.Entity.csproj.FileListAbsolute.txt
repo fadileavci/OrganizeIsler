@@ -1,0 +1,12 @@
+C:\Users\Asus\source\repos\OrganizeIsler\OrganizeIsler.Entity\bin\Debug\OrganizeIsler.Entity.dll.config
+C:\Users\Asus\source\repos\OrganizeIsler\OrganizeIsler.Entity\bin\Debug\OrganizeIsler.Entity.dll
+C:\Users\Asus\source\repos\OrganizeIsler\OrganizeIsler.Entity\bin\Debug\OrganizeIsler.Entity.pdb
+C:\Users\Asus\source\repos\OrganizeIsler\OrganizeIsler.Entity\bin\Debug\EntityFramework.dll
+C:\Users\Asus\source\repos\OrganizeIsler\OrganizeIsler.Entity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Asus\source\repos\OrganizeIsler\OrganizeIsler.Entity\bin\Debug\EntityFramework.xml
+C:\Users\Asus\source\repos\OrganizeIsler\OrganizeIsler.Entity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Asus\source\repos\OrganizeIsler\OrganizeIsler.Entity\obj\Debug\OrganizeIsler.Entity.csprojAssemblyReference.cache
+C:\Users\Asus\source\repos\OrganizeIsler\OrganizeIsler.Entity\obj\Debug\OrganizeIsler.Entity.csproj.CoreCompileInputs.cache
+C:\Users\Asus\source\repos\OrganizeIsler\OrganizeIsler.Entity\obj\Debug\OrganizeIsler.Entity.csproj.CopyComplete
+C:\Users\Asus\source\repos\OrganizeIsler\OrganizeIsler.Entity\obj\Debug\OrganizeIsler.Entity.dll
+C:\Users\Asus\source\repos\OrganizeIsler\OrganizeIsler.Entity\obj\Debug\OrganizeIsler.Entity.pdb

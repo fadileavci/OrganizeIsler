@@ -1,0 +1,50 @@
+﻿@model IEnumerable<OrganizeIsler.Entity.OrganizeKullanici>
+
+@{
+	ViewBag.Title = "Etkinliklerim";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/PartialView/HeaderPartialView.cshtml")
+
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Organizeler.OrganizeAdi)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Organizeler.OrganizeYeri)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.KatılımcıSayisi)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.KayitTarihi)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Organizeler.OrganizeAdi)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Organizeler.OrganizeYeri)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.KatılımcıSayisi)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.KayitTarihi)
+			</td>
+			<td>
+						@Html.ActionLink("Duzenle", "KullaniciEtkinlikDuzenle", new { @id = item.OrganizeKatilimciID }) |
+						@Html.ActionLink("Delete", "KullaniciEtkinlikSil", new { @id = item.OrganizeKatilimciID })
+					</td>
+		</tr>
+	}
+
+</table>

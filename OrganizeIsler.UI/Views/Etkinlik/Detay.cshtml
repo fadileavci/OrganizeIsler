@@ -1,0 +1,88 @@
+﻿@using OrganizeIsler.UI.Models
+@model OrganizeKatilimModel
+@{
+	ViewBag.Title = "Detay";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("~/Views/PartialView/HeaderPartialView.cshtml")
+
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<br />
+<div>
+	<div>
+		<a href="#"><img style="width:400px;height:200px;" src="@Model.organizeler.OrganizeResmi" /></a>
+	</div>
+</div>
+<div style="color:brown"><h3><a href="#"> @Html.DisplayFor(x => x.organizeler.OrganizeAdi)</a></h3></div>
+<div><b>Tarih:</b>@Html.DisplayFor(x => x.organizeler.OrganizeKayitTarihi)</div>
+<div><b>Yer:</b>@Html.DisplayFor(x => x.organizeler.OrganizeYeri)</div>
+<div><b>Katılımcı Sayısı:</b>@Html.DisplayFor(x => x.organizeler.KatilimciSayisi)</div>
+<div><b>Etkinliği Düzenleyen:</b>@Html.DisplayFor(x => x.organizeler.Kullanicilar.Adi)</div>
+<div>Kontenjan: <b>kontenjan sayısı buraya gelicek </b></div>
+
+<br />
+<br />
+<div class="w3-container col-lg-2">
+	<button onclick="document.getElementById('id01').style.display='block'" class="btn btn-danger">Mesaj Gönder</button>
+	<div id="id01" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+			<div class="w3-center">
+				<br>
+				<span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5gTsY80SQ8D_4S4fMgdaDPa54W5thXEqDCEF-WqEoaIX0P6H7" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+			</div>
+			@using (Html.BeginForm("MesajGonder", "Mesaj", FormMethod.Post))
+			{
+				<div class="w3-section">
+					@Html.HiddenFor(x=>x.organizeler.OrganizeID)
+					<label><b>Mesaj İçeriği</b></label>
+					@Html.TextBoxFor(x=>x.MesajIcerik, new  {@class="form-control",placeholder="Mesaj içeriğini yazın.." })
+					@*<input class="w3-input w3-border" type="text" placeholder="Mesaj..." name="psw" required>*@
+					<button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Mesajı Gönder</button>
+				</div>
+			}
+			<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+				<button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">İptal</button>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div class="w3-container col-lg-2">
+	<button onclick="document.getElementById('id02').style.display='block'" class="btn btn-danger">Etkinliğe Katıl</button>
+	<div id="id02" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+			@using (Html.BeginForm("EtkinligeKatil", "Etkinlik", FormMethod.Post))
+			{
+			<div class="w3-section">
+				@Html.HiddenFor(x => x.organizeler.OrganizeID)
+		
+				<label><b>Kaç Kişi Katılacaksınız</b></label>
+				@Html.TextBoxFor(x => x.KatilimciSayisi, new { @class = "form-control", type = "number", placeholder = "Kaç kişi katılacaksınız..." })
+				<button class="btn btn-success" type="submit">Kayıt Ol</button>
+			</div>
+			}
+			<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+				<button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-button w3-red">İptal</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
