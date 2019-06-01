@@ -1,0 +1,268 @@
+USE [master]
+GO
+/****** Object:  Database [OrganizeIsler]    Script Date: 01.06.2019 02:47:15 ******/
+
+
+CREATE DATABASE [OrganizeIsler]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'OrganizeIsler', FILENAME = N'c:\Program Files\Microsoft SQL Server\MSSQL11.SQLEXPRESS\MSSQL\DATA\OrganizeIsler.mdf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'OrganizeIsler_log', FILENAME = N'c:\Program Files\Microsoft SQL Server\MSSQL11.SQLEXPRESS\MSSQL\DATA\OrganizeIsler_log.ldf' , SIZE = 2048KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [OrganizeIsler] SET COMPATIBILITY_LEVEL = 110
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [OrganizeIsler].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [OrganizeIsler] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET AUTO_CREATE_STATISTICS ON 
+GO
+ALTER DATABASE [OrganizeIsler] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [OrganizeIsler] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [OrganizeIsler] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [OrganizeIsler] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [OrganizeIsler] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [OrganizeIsler] SET  MULTI_USER 
+GO
+ALTER DATABASE [OrganizeIsler] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [OrganizeIsler] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [OrganizeIsler] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [OrganizeIsler] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+USE [OrganizeIsler]
+GO
+/****** Object:  Table [dbo].[Kullanicilar]    Script Date: 01.06.2019 02:47:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Kullanicilar](
+	[KullaniciID] [int] IDENTITY(1,1) NOT NULL,
+	[Adi] [nvarchar](50) NULL,
+	[Soyadi] [nvarchar](50) NULL,
+	[Email] [nvarchar](50) NULL,
+	[Tel] [nvarchar](50) NULL,
+	[Sifre] [nvarchar](50) NULL,
+	[Tarih] [datetime] NULL,
+ CONSTRAINT [PK_Kullanicilar] PRIMARY KEY CLUSTERED 
+(
+	[KullaniciID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Mesaj]    Script Date: 01.06.2019 02:47:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Mesaj](
+	[MesajID] [int] IDENTITY(1,1) NOT NULL,
+	[MesajiGonderenID] [int] NULL,
+	[MesajiAlanID] [int] NULL,
+	[Mesaj] [nvarchar](max) NULL,
+ CONSTRAINT [PK_Mesaj] PRIMARY KEY CLUSTERED 
+(
+	[MesajID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[OrganizeKullanici]    Script Date: 01.06.2019 02:47:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrganizeKullanici](
+	[OrganizeKatilimciID] [int] IDENTITY(1,1) NOT NULL,
+	[OrganizeID] [int] NULL,
+	[KatilimciID] [int] NULL,
+	[KatýlýmcýSayisi] [int] NULL,
+	[KayitTarihi] [datetime] NULL,
+ CONSTRAINT [PK_OrganizeKatilimci] PRIMARY KEY CLUSTERED 
+(
+	[OrganizeKatilimciID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Organizeler]    Script Date: 01.06.2019 02:47:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Organizeler](
+	[OrganizeID] [int] IDENTITY(1,1) NOT NULL,
+	[OrganizeAdi] [nvarchar](50) NULL,
+	[OrganizeKayitTarihi] [datetime] NULL,
+	[OrganizeTarihi] [datetime] NULL,
+	[KatilimciSayisi] [int] NULL,
+	[OrganizeYeri] [nvarchar](50) NULL,
+	[OrganizeResmi] [nvarchar](max) NULL,
+	[OrganizatorID] [int] NOT NULL,
+ CONSTRAINT [PK_Organizeler] PRIMARY KEY CLUSTERED 
+(
+	[OrganizeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET IDENTITY_INSERT [dbo].[Kullanicilar] ON 
+
+GO
+INSERT [dbo].[Kullanicilar] ([KullaniciID], [Adi], [Soyadi], [Email], [Tel], [Sifre], [Tarih]) VALUES (1, N'Fadile', N'Avcý', N'fadile@gmail.com', N'05449293999', N'123', CAST(0x0000AA5800000000 AS DateTime))
+GO
+INSERT [dbo].[Kullanicilar] ([KullaniciID], [Adi], [Soyadi], [Email], [Tel], [Sifre], [Tarih]) VALUES (2, N'Büsra', N'Baþaran', N'busra@gmail.com', N'05668989089', N'123', CAST(0x0000AA5500000000 AS DateTime))
+GO
+INSERT [dbo].[Kullanicilar] ([KullaniciID], [Adi], [Soyadi], [Email], [Tel], [Sifre], [Tarih]) VALUES (3, N'Kubra', N'CAN', N'kubra@gmail.com', N'05667879090', N'123', CAST(0x0000AA4400000000 AS DateTime))
+GO
+INSERT [dbo].[Kullanicilar] ([KullaniciID], [Adi], [Soyadi], [Email], [Tel], [Sifre], [Tarih]) VALUES (4, N'Gülbahar ', N'Ýnan', N'gulbahar@gmail.com', N'05446768989', N'123', CAST(0x0000AA5A00000000 AS DateTime))
+GO
+INSERT [dbo].[Kullanicilar] ([KullaniciID], [Adi], [Soyadi], [Email], [Tel], [Sifre], [Tarih]) VALUES (5, N'deneme', N'deneme', N'deneme@gmail.com', N'denmee', N'123', NULL)
+GO
+INSERT [dbo].[Kullanicilar] ([KullaniciID], [Adi], [Soyadi], [Email], [Tel], [Sifre], [Tarih]) VALUES (6, N'Gülten', N'Atalý', N'gülten@gmail.com', N'05447879098', N'1234', NULL)
+GO
+INSERT [dbo].[Kullanicilar] ([KullaniciID], [Adi], [Soyadi], [Email], [Tel], [Sifre], [Tarih]) VALUES (7, N'Ayse', N'Gülmez', N'ayse@gmail.com', N'05447989087', N'1234', NULL)
+GO
+INSERT [dbo].[Kullanicilar] ([KullaniciID], [Adi], [Soyadi], [Email], [Tel], [Sifre], [Tarih]) VALUES (8, N'Mehmet Fatih', N'Akan', N'fatih.akan@bilgeadam.com', N'0545664747', N'1234', NULL)
+GO
+INSERT [dbo].[Kullanicilar] ([KullaniciID], [Adi], [Soyadi], [Email], [Tel], [Sifre], [Tarih]) VALUES (9, N'Hasan', N'Alkan', N'hasan@gmail.com', N'05447678989', N'1234', NULL)
+GO
+INSERT [dbo].[Kullanicilar] ([KullaniciID], [Adi], [Soyadi], [Email], [Tel], [Sifre], [Tarih]) VALUES (10, N'Bilal', N'Çaliþkan', N'bilal@gmail.com', N'05448785454', N'1234', NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Kullanicilar] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Mesaj] ON 
+
+GO
+INSERT [dbo].[Mesaj] ([MesajID], [MesajiGonderenID], [MesajiAlanID], [Mesaj]) VALUES (1, 1, 2, N'merhaba bu bir denemedir')
+GO
+INSERT [dbo].[Mesaj] ([MesajID], [MesajiGonderenID], [MesajiAlanID], [Mesaj]) VALUES (3, 1, 3, N'merhaba bu bir denemedir')
+GO
+INSERT [dbo].[Mesaj] ([MesajID], [MesajiGonderenID], [MesajiAlanID], [Mesaj]) VALUES (4, 2, 1, N'merhaba bu bir denemedir')
+GO
+INSERT [dbo].[Mesaj] ([MesajID], [MesajiGonderenID], [MesajiAlanID], [Mesaj]) VALUES (5, 2, 3, N'merhaba bu bir denemedir')
+GO
+INSERT [dbo].[Mesaj] ([MesajID], [MesajiGonderenID], [MesajiAlanID], [Mesaj]) VALUES (6, 3, 1, N'merhaba bu bir denemedir')
+GO
+INSERT [dbo].[Mesaj] ([MesajID], [MesajiGonderenID], [MesajiAlanID], [Mesaj]) VALUES (7, 3, 2, N'merhaba bu bir denemedir')
+GO
+INSERT [dbo].[Mesaj] ([MesajID], [MesajiGonderenID], [MesajiAlanID], [Mesaj]) VALUES (8, 1, 2, N'yu')
+GO
+INSERT [dbo].[Mesaj] ([MesajID], [MesajiGonderenID], [MesajiAlanID], [Mesaj]) VALUES (9, 2, 3, N'oyy mesaj mý gönderiyormuþþþ :)')
+GO
+INSERT [dbo].[Mesaj] ([MesajID], [MesajiGonderenID], [MesajiAlanID], [Mesaj]) VALUES (10, 1, 1, N'fýtýtýtý')
+GO
+INSERT [dbo].[Mesaj] ([MesajID], [MesajiGonderenID], [MesajiAlanID], [Mesaj]) VALUES (11, 1, 2, N'buda bir deneme')
+GO
+INSERT [dbo].[Mesaj] ([MesajID], [MesajiGonderenID], [MesajiAlanID], [Mesaj]) VALUES (12, 1, 2, N'busraaa sana mesajjj ')
+GO
+SET IDENTITY_INSERT [dbo].[Mesaj] OFF
+GO
+SET IDENTITY_INSERT [dbo].[OrganizeKullanici] ON 
+
+GO
+INSERT [dbo].[OrganizeKullanici] ([OrganizeKatilimciID], [OrganizeID], [KatilimciID], [KatýlýmcýSayisi], [KayitTarihi]) VALUES (1, 1, 1, 2, CAST(0x0000AA5A00000000 AS DateTime))
+GO
+INSERT [dbo].[OrganizeKullanici] ([OrganizeKatilimciID], [OrganizeID], [KatilimciID], [KatýlýmcýSayisi], [KayitTarihi]) VALUES (2, 1, 2, 1, CAST(0x0000AA5A00000000 AS DateTime))
+GO
+INSERT [dbo].[OrganizeKullanici] ([OrganizeKatilimciID], [OrganizeID], [KatilimciID], [KatýlýmcýSayisi], [KayitTarihi]) VALUES (3, 1, 4, 2, CAST(0x0000AA5A00000000 AS DateTime))
+GO
+INSERT [dbo].[OrganizeKullanici] ([OrganizeKatilimciID], [OrganizeID], [KatilimciID], [KatýlýmcýSayisi], [KayitTarihi]) VALUES (4, 2, 2, 5, CAST(0x0000AA5A00000000 AS DateTime))
+GO
+INSERT [dbo].[OrganizeKullanici] ([OrganizeKatilimciID], [OrganizeID], [KatilimciID], [KatýlýmcýSayisi], [KayitTarihi]) VALUES (5, 2, 3, 1, CAST(0x0000AA5A00000000 AS DateTime))
+GO
+INSERT [dbo].[OrganizeKullanici] ([OrganizeKatilimciID], [OrganizeID], [KatilimciID], [KatýlýmcýSayisi], [KayitTarihi]) VALUES (7, 5, 3, 1, CAST(0x0000AA5A00000000 AS DateTime))
+GO
+INSERT [dbo].[OrganizeKullanici] ([OrganizeKatilimciID], [OrganizeID], [KatilimciID], [KatýlýmcýSayisi], [KayitTarihi]) VALUES (24, 5, 1, 1, CAST(0x0000AA5D009DE3CD AS DateTime))
+GO
+INSERT [dbo].[OrganizeKullanici] ([OrganizeKatilimciID], [OrganizeID], [KatilimciID], [KatýlýmcýSayisi], [KayitTarihi]) VALUES (26, 2, 1, 8, CAST(0x0000AA5D00AE1C93 AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[OrganizeKullanici] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Organizeler] ON 
+
+GO
+INSERT [dbo].[Organizeler] ([OrganizeID], [OrganizeAdi], [OrganizeKayitTarihi], [OrganizeTarihi], [KatilimciSayisi], [OrganizeYeri], [OrganizeResmi], [OrganizatorID]) VALUES (1, N'Piknik Organizasyonu', CAST(0x0000AA5A00000000 AS DateTime), CAST(0x0000AA7900000000 AS DateTime), 25, N'Belgrad', N'/Content/images/1e688ce7-df04-4acd-8246-50525a40e1f1.jpg', 1)
+GO
+INSERT [dbo].[Organizeler] ([OrganizeID], [OrganizeAdi], [OrganizeKayitTarihi], [OrganizeTarihi], [KatilimciSayisi], [OrganizeYeri], [OrganizeResmi], [OrganizatorID]) VALUES (2, N'Karadeniz Turu', CAST(0x0000AA5A00000000 AS DateTime), CAST(0x0000AA7A00000000 AS DateTime), 50, N'Ýstanbul', N'/Content/images/58bb20a8-0c83-461d-a9d4-13ff0cb27cf6.jpg', 2)
+GO
+INSERT [dbo].[Organizeler] ([OrganizeID], [OrganizeAdi], [OrganizeKayitTarihi], [OrganizeTarihi], [KatilimciSayisi], [OrganizeYeri], [OrganizeResmi], [OrganizatorID]) VALUES (5, N'Ýftar Yemeði Organizasyonu', CAST(0x0000AA5300000000 AS DateTime), CAST(0x0000AA5D00000000 AS DateTime), 100, N'istanbul', N'/Content/images/2a7c9b12-3ca9-4904-b242-df31e53859e0.jpg', 3)
+GO
+SET IDENTITY_INSERT [dbo].[Organizeler] OFF
+GO
+ALTER TABLE [dbo].[Mesaj]  WITH CHECK ADD  CONSTRAINT [FK_Mesaj_Kullanicilar] FOREIGN KEY([MesajiGonderenID])
+REFERENCES [dbo].[Kullanicilar] ([KullaniciID])
+GO
+ALTER TABLE [dbo].[Mesaj] CHECK CONSTRAINT [FK_Mesaj_Kullanicilar]
+GO
+ALTER TABLE [dbo].[Mesaj]  WITH CHECK ADD  CONSTRAINT [FK_Mesaj_Kullanicilar1] FOREIGN KEY([MesajiAlanID])
+REFERENCES [dbo].[Kullanicilar] ([KullaniciID])
+GO
+ALTER TABLE [dbo].[Mesaj] CHECK CONSTRAINT [FK_Mesaj_Kullanicilar1]
+GO
+ALTER TABLE [dbo].[OrganizeKullanici]  WITH CHECK ADD  CONSTRAINT [FK_OrganizeKullanici_Kullanicilar] FOREIGN KEY([KatilimciID])
+REFERENCES [dbo].[Kullanicilar] ([KullaniciID])
+GO
+ALTER TABLE [dbo].[OrganizeKullanici] CHECK CONSTRAINT [FK_OrganizeKullanici_Kullanicilar]
+GO
+ALTER TABLE [dbo].[OrganizeKullanici]  WITH CHECK ADD  CONSTRAINT [FK_OrganizeKullanici_Organizeler] FOREIGN KEY([OrganizeID])
+REFERENCES [dbo].[Organizeler] ([OrganizeID])
+GO
+ALTER TABLE [dbo].[OrganizeKullanici] CHECK CONSTRAINT [FK_OrganizeKullanici_Organizeler]
+GO
+ALTER TABLE [dbo].[Organizeler]  WITH CHECK ADD  CONSTRAINT [FK_Organizeler_Kullanicilar] FOREIGN KEY([OrganizatorID])
+REFERENCES [dbo].[Kullanicilar] ([KullaniciID])
+GO
+ALTER TABLE [dbo].[Organizeler] CHECK CONSTRAINT [FK_Organizeler_Kullanicilar]
+GO
+USE [master]
+GO
+ALTER DATABASE [OrganizeIsler] SET  READ_WRITE 
+GO
